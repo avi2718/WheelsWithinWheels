@@ -16,11 +16,16 @@ public class Payment {
     public int customerNumber;
     public Float amount;
     public Date paymentDate;
+    public TransactionType type = TransactionType.PAYMENT;
     
     public Payment(int cn, Float a, Date pd) {
         customerNumber = cn;
         amount = a;
         paymentDate = pd;
+    }
+    
+    public String toString() {
+        return paymentDate.toString() + customerNumber + amount;
     }
 }
 

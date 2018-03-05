@@ -10,7 +10,7 @@ package wheelswithinwheels;
  * @author bhairavi
  */
 import java.util.*;
-public class Order {
+public class Order extends Transaction {
     private static int orderNumberCounter = 0;
     public int customerNumber;
     public Date orderDate;
@@ -20,6 +20,7 @@ public class Order {
     public String comment;
     public Date promiseDate;
     public Date completionDate;
+    public TransactionType type = TransactionType.ORDER;
     
     public Order(int customerNumber, Date orderDate, String brand, String level, String comment) {
         this.customerNumber = customerNumber;
@@ -36,5 +37,9 @@ public class Order {
         int numberDays = PriceList.returnDays(level);
         c.add(Calendar.DATE, numberDays);
         return c.getTime();
+    }
+    
+    public String toString() {
+        return orderDate.toString() + customerNumber + brand + level + repairPrice + promiseDate.toString() + comment;
     }
 }
