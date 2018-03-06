@@ -13,10 +13,15 @@ public class RepairPrice {
     public String brand;
     public String level;
     public Float price;
+    public int days;
     
     public RepairPrice(String brand, String level, Float price ) {
         this.brand = brand;
         this.level = level;
         this.price = price;
+    }
+    
+    public String savableString() {
+        return "addrp" + brand + level + price + days;
     }
 }

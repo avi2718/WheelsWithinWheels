@@ -22,4 +22,12 @@ public class PriceList {
             return 0;
         }
     }
+    
+    public String savableString() {
+        String s = "";
+        for (RepairPrice rp: prices) {
+            s += rp.savableString() + "\n";
+        }
+        return s;
+    }
 }

@@ -11,4 +11,6 @@ package wheelswithinwheels;
  */
 abstract class Transaction {
     public TransactionType type;
+    
+    abstract public String savableString();
 }

@@ -27,5 +27,9 @@ public class Payment {
     public String toString() {
         return paymentDate.toString() + customerNumber + amount;
     }
+    
+    public String savableString() {
+        return "addp" + customerNumber + paymentDate + amount;
+    }
 }
 

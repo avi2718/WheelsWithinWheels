@@ -42,4 +42,8 @@ public class Order extends Transaction {
     public String toString() {
         return orderDate.toString() + customerNumber + brand + level + repairPrice + promiseDate.toString() + comment;
     }
+    
+    public String savableString() {
+        return "addo" + customerNumber + orderDate + brand + level + comment;
+    }
 }

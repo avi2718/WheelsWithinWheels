@@ -28,4 +28,11 @@ public class CustomerDatabase {
         return null;
     }
     
+    public String savableString() {
+        String s = "";
+        for (Customer c : customers.values()) {
+            s += c.savableString() + "\n";
+        }
+        return s;
+    }
 }

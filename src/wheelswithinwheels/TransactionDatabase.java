@@ -36,4 +36,12 @@ public class TransactionDatabase {
             }
         }
     }
+    
+    public String savableString() {
+        String s = "";
+        for (Transaction t : transactions.values()) {
+            s += t.savableString() + "\n";
+        }
+        return s;
+    }
 }

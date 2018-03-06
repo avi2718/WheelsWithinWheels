@@ -21,4 +21,8 @@ public class Customer {
         customerNumberCounter++;
         customerNumber = customerNumberCounter;
     }
+    
+    public String savableString() {
+        return "addc" + this.firstName + this.lastName;
+    }
 }
