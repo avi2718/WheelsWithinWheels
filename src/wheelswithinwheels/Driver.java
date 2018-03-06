@@ -25,23 +25,23 @@ public class Driver {
             
             switch (line[0]) {
                 case "quit": if (shouldQuit()) {break;}
-                case "help": help();
-                case "addrp": addrp(line);
-                case "addc": addc(line);
-                case "addo": addo(line);
-                case "addp": addp(line);
-                case "comp": comp(line);
-                case "printrp": printrp();
-                case "printcnum": printcnum();
-                case "printcname": printcname();
-                case "printo": printo();
-                case "printp": printp();
-                case "printt": printt();
-                case "prints": prints();
-                case "readc": readc(line[1]);
-                case "savebs": savebs(line[1]);
-                case "restorebs": restorebs(line[1]);
-                default: System.out.println("Invalid Command");
+                case "help": help(); break;
+                case "addrp": addrp(line); break;
+                case "addc": addc(line); break;
+                case "addo": addo(line); break;
+                case "addp": addp(line); break;
+                case "comp": comp(line); break;
+                case "printrp": printrp(); break;
+                case "printcnum": printcnum(); break;
+                case "printcname": printcname(); break;
+                case "printo": printo(); break;
+                case "printp": printp(); break;
+                case "printt": printt(); break;
+                case "prints": prints(); break;
+                case "readc": readc(line[1]); break;
+                case "savebs": savebs(line[1]); break;
+                case "restorebs": restorebs(line[1]); break;
+                default: System.out.println("Invalid Command"); break;
             }
         }
         
