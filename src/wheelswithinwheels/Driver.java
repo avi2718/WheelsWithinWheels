@@ -13,8 +13,9 @@ import java.util.Scanner;
  */
 public class Driver {
     Support s = new Support();
+    TransactionDatabase td = new TransactionDatabase();
+    CustomerDatabase cd = new CustomerDatabase();
 
-    
     
     public void driver() {
         Scanner input = new Scanner(System.in);
@@ -136,7 +137,8 @@ public class Driver {
     }
     
     private void savebs(String filename) {
-        
+        String bikeShopAsString = td.savableString() + cd.savableString();
+        s.writeTextFile(filename, bikeShopAsString);
     }
     
     private void restorebs(String filename) {
