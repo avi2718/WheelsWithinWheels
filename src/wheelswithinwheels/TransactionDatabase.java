@@ -7,21 +7,21 @@ package wheelswithinwheels;
 
 /**
  *
- * @author bhairavi
+ * @author Shai
  */
 
 import java.util.*;
 
 public class TransactionDatabase {
-    public Map<Integer, Transaction> transactions;
+    public static Map<Integer, Transaction> transactions;
     
-    public void printTransactions() {
+    public static void printTransactions() {
         for (Transaction t : transactions.values()) {
             System.out.println(t);
         }
     }
     
-    public void printPayments() {
+    public static void printPayments() {
         for (Transaction t : transactions.values()) {
             if (t.type == TransactionType.PAYMENT) {
                 System.out.println(t);
@@ -29,7 +29,7 @@ public class TransactionDatabase {
         }
     }
     
-    public void printOrders() {
+    public static void printOrders() {
         for (Transaction t : transactions.values()) {
             if (t.type == TransactionType.ORDER) {
                 System.out.println(t);
