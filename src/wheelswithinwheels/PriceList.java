@@ -7,10 +7,10 @@ package wheelswithinwheels;
 
 /**
  *
- * @author bhairavi
+ * @author Shai
  */
 public class PriceList {
-    private RepairPrice[] prices;
+    public static RepairPrice[] prices;
     
     public static int returnDays(String level) {
         switch(level) {
@@ -20,6 +20,12 @@ public class PriceList {
             case "Rush": return 2;
             default: System.out.println("invalid level");
             return 0;
+        }
+    }
+    
+    public static void printList(){
+        for (RepairPrice p : prices) {
+            System.out.println(p);
         }
     }
     
