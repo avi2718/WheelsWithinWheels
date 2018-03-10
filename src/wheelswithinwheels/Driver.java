@@ -5,20 +5,27 @@
  */
 package wheelswithinwheels;
 
-import java.util.Scanner;
-import java.io.*;
-
 /**
  *
- * @author maxwelllittle
+ * @author Shai
  */
+
+import java.util.Scanner;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+
 public class Driver {
 
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
     Support s = new Support();
     TransactionDatabase td = new TransactionDatabase();
     CustomerDatabase cd = new CustomerDatabase();
 
-    
+
     public void driver() {
         Scanner input = new Scanner(System.in);
 
@@ -121,52 +128,113 @@ public class Driver {
                 + "\nrestorebs \nRestores a previously saved version of the bike shop so it can be worked on");
     }
 
-    private void addrp(String[] params) {
-
+    private boolean isStringFloat(String s)
+{
+    try
+    {
+        Float.parseFloat(s);
+        return true;
+    } catch (NumberFormatException ex)
+    {
+        return false;
+    }
+}
+    
+    private boolean isStringInt(String s)
+{
+    try
+    {
+        Integer.parseInt(s);
+        return true;
+    } catch (NumberFormatException ex)
+    {
+        return false;
+    }
+}
+    
+     private boolean isStringDate(String s)
+{
+    try
+    {
+        Date date = formatter.parse(s);
+        return true;
+    } catch (ParseException e)
+    {
+        return false;
+    }
+}
+    
+ 
+  
+    private void addrp(String[] params){   
+        if (params.length != 5) {System.out.println("Incorrect number of parameters"); return;} 
+        if (params[1] instanceof String && params[2] instanceof String && isStringFloat(params[3]) && isStringInt(params[4])){
+           RepairPrice newrp = new RepairPrice(params[1], params[2], Float.parseFloat(params[3]), Integer.parseInt(params[4]));
+           PriceList.prices[PriceList.prices.length + 1] = (newrp);
+        } else{
+            System.out.println("Incorrect type of one or more parameters"); return;
+        }
     }
 
+    
+   
     private void addc(String[] params) {
-
+        if (params.length != 3) {System.out.println("Incorrect number of parameters"); return;} 
+        Customer newc = new Customer(params[1], params[2]);
+        
     }
 
     private void addo(String[] params) {
-
+        if (!(params.length >= 5)) {System.out.println("Incorrect number of parameters"); return;} 
+        if (isStringInt(params[1]) && isStringDate(params[2]) && isStringFloat(params[3]) && isStringInt(params[4])){
+            Order newo = new Order(Integer.parseInt(params[1]), (params[2]), Float.parseFloat(params[3]), params[4], params[5]);
+        }
     }
 
     private void addp(String[] params) {
-
+        if ((params.length != 4)) {System.out.println("Incorrect number of parameters"); return;} 
+        if (isStringInt(params[1]) && isStringFloat(params[2]) && isStringDate(params[3])){
+            Payment newp = new Payment(Integer.parseInt(params[1]), Float.parseFloat(params[2]), (params[3]));
+        }
     }
 
     private void comp(String[] params) {
-
+        if ((params.length != 3)) {System.out.println("Incorrect number of parameters"); return;} 
+        if (isStringInt(params[1]) && isStringDate(params[2])){
+            
+        }
     }
 
     private void printrp() {
-
+        PriceList.printList();
     }
 
-    private void printcnum() {
-
+    private void printcnum(String[] params) {
+        System.out.println(CustomerDatabase.findByNumber(Integer.parseInt(params[1])));
     }
 
-    private void printcname() {
-
+    private void printcname(String[] params) {
+        System.out.println(CustomerDatabase.findByName(params[1], params[2]));
     }
 
     private void printo() {
-
+        TransactionDatabase.printOrders();
     }
 
     private void printp() {
-
+        TransactionDatabase.printPayments();
     }
 
     private void printt() {
-
+        TransactionDatabase.printTransactions();
     }
 
+    private void printr() {
+        TransactionDatabase.printRecieveables();
+    }
+   
     private void prints() {
-
+        TransactionDatabase.printStatments();
     }
 
     private void readc(String filename) {
