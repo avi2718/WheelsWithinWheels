@@ -43,58 +43,70 @@ public class Driver {
                 if (shouldQuit()) {
                     return false;
                 }
+                break;
             case "help":
                 help();
-                return true;
+                break;
             case "addrp":
                 addrp(line);
-                return true;
+                break;
             case "addc":
                 addc(line);
-                return true;
+                break;
             case "addo":
                 addo(line);
-                return true;
+                break;
             case "addp":
                 addp(line);
-                return true;
+                break;
             case "comp":
                 comp(line);
-                return true;
+                break;
             case "printrp":
                 printrp();
-                return true;
+                break;
             case "printcnum":
                 printcnum(line);
-                return true;
+                break;
             case "printcname":
                 printcname(line);
-                return true;
+                break;
             case "printo":
                 printo();
-                return true;
+                break;
             case "printp":
                 printp();
-                return true;
+                break;
             case "printt":
                 printt();
-                return true;
+                break;
             case "prints":
                 prints();
-                return true;
+                break;
             case "readc":
-                readc(line[1]);
-                return true;
-            case "savebs":
-                savebs(line[1]);
-                return true;
+                if (line.length == 2){
+                    readc(line[1]);
+                }
+                else {System.out.print("Bad Input");}
+                break;
             case "restorebs":
-                restorebs(line[1]);
-                return true;
+                //System.out.println("Restoring Bike Shop");
+                if (line.length == 2){
+                    restorebs(line[1]);
+                }
+                else {System.out.println("Bad Input");}
+                break;
+            case "savebs":
+                if (line.length == 2){
+                    savebs(line[1]);
+                }
+                else {System.out.print("Bad Input");}
+                break;
             default:
-                System.out.println("Invalid Command");
-                return true;
+                System.out.print("Invalid Command");
+                break;
         }
+        return true;
     }
 
     private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
@@ -165,8 +177,8 @@ public class Driver {
     }
 }
     
- 
-  
+ //The add functions never actually add the data to the databases
+     
     private void addrp(String[] params){   
         if (params.length != 5) {System.out.println("Incorrect number of parameters"); return;} 
         if (params[1] instanceof String && params[2] instanceof String && isStringFloat(params[3]) && isStringInt(params[4])){
@@ -250,8 +262,8 @@ public class Driver {
     private void restorebs(String filename) {
        String file = s.readTextFile(filename);
        String[] lines = s.splitStringIntoLines(file);
-       for (int e = 0; e < lines.length; e++) {
-           driverCycle(lines[e]);
-       }
+        for (String line : lines) {
+            driverCycle(line);
+        }
     }
 }
