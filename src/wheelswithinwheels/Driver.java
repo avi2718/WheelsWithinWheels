@@ -65,10 +65,10 @@ public class Driver {
                 printrp();
                 return true;
             case "printcnum":
-                printcnum();
+                printcnum(line);
                 return true;
             case "printcname":
-                printcname();
+                printcname(line);
                 return true;
             case "printo":
                 printo();
@@ -114,6 +114,7 @@ public class Driver {
                 + "\naddo (customerNumber) (date) (brand) (level) (comment) "
                 + "\nAdds an order to the system with the given options and an optional comment. "
                 + "\naddp (customerNumber) (date) (amount) "
+                + "\naddrp (brand) (level) (price) (days) Adds an repair type and price "
                 + "\nTells the system that a given customer has made a payment of a certain amount. "
                 + "\ncomp (orderNumber) (completionDate) "
                 + "\nTells the system that a given order was completed on a given date "
@@ -172,7 +173,7 @@ public class Driver {
            RepairPrice newrp = new RepairPrice(params[1], params[2], Float.parseFloat(params[3]), Integer.parseInt(params[4]));
            PriceList.prices[PriceList.prices.length + 1] = (newrp);
         } else{
-            System.out.println("Incorrect type of one or more parameters"); return;
+            System.out.println("Incorrect type of one or more parameters");
         }
     }
 
@@ -218,23 +219,23 @@ public class Driver {
     }
 
     private void printo() {
-        TransactionDatabase.printOrders();
+        td.printOrders();
     }
 
     private void printp() {
-        TransactionDatabase.printPayments();
+        td.printPayments();
     }
 
     private void printt() {
-        TransactionDatabase.printTransactions();
+        td.printTransactions();
     }
 
     private void printr() {
-        TransactionDatabase.printRecieveables();
+        td.printRecievables();
     }
    
     private void prints() {
-        TransactionDatabase.printStatments();
+        td.printStatements();
     }
 
     private void readc(String filename) {
@@ -247,22 +248,10 @@ public class Driver {
     }
 
     private void restorebs(String filename) {
-        try {
-            FileReader reader = new FileReader(filename);
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            String line = "";
-            
-            while((line = bufferedReader.readLine()) != null) {
-                driverCycle(line);
-            }   
-            
-            bufferedReader.close();
-        }
-        catch(FileNotFoundException notFount) {
-            System.out.println("File Not Found At Given Location");
-        }
-        catch(IOException badChar) {
-            System.out.println("Save File Has Been Corrupted/Is Invalid");
-        }
+       String file = s.readTextFile(filename);
+       String[] lines = s.splitStringIntoLines(file);
+       for (int e = 0; e < lines.length; e++) {
+           driverCycle(lines[e]);
+       }
     }
 }
