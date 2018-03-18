@@ -9,18 +9,18 @@ package wheelswithinwheels;
  *
  * @author Shai
  */
+
+import java.util.*;
 public class PriceList {
-    public static RepairPrice[] prices;
+    public static ArrayList<RepairPrice> prices;
+    private static Set<String> validBrands = new HashSet(Arrays.asList("trek", "cannondale", "salsa",
+            "jamis", "specialized", "surly", "giant", "bianchi", "soma", "cervelo"));
+    private static Set<String> validLevels = new HashSet(Arrays.asList("silver", "gold", "platinum"));
+   
     
-    public static int returnDays(String level) {
-        switch(level) {
-            case "Silver": return 6;
-            case "Gold": return 5;
-            case "Platinum": return 3;
-            case "Rush": return 2;
-            default: System.out.println("invalid level");
-            return 0;
-        }
+    public static void addRepairPrice(String brand, String level, int price, int days) {
+        RepairPrice rp = new RepairPrice(brand, level, price, days);
+        prices.add(rp);
     }
     
     public static void printList(){
@@ -29,11 +29,28 @@ public class PriceList {
         }
     }
     
-    public String savableString() {
+    public static String savableString() {
         String s = "";
         for (RepairPrice rp: prices) {
             s += rp.savableString() + "\n";
         }
         return s;
+    }
+    
+    public static boolean isValidBrand(String brandString) {
+        return validBrands.contains(brandString);
+    }
+    
+    public static boolean isValidLevel(String levelString) {
+        return validLevels.contains(levelString);
+    }
+    
+    public static int returnNumberDays(String brand, String level) {
+        for (RepairPrice rp: prices) {
+            if(rp.brand == brand && rp.level == level) {
+                return rp.days;
+            }
+        }
+        return 0;
     }
 }

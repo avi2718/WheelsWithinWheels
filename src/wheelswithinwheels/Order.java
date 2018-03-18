@@ -11,7 +11,6 @@ package wheelswithinwheels;
  */
 import java.util.*;
 public class Order extends Transaction {
-    private static int orderNumberCounter = 0;
     public int customerNumber;
     public Date orderDate;
     public String brand;
@@ -28,13 +27,13 @@ public class Order extends Transaction {
         this.brand = brand;
         this.level = level;
         this.comment = comment;
-        promiseDate = plusDays(orderDate, level);
+        promiseDate = plusDays(orderDate, brand, level);
     }
     
-    private Date plusDays(Date orderDate, String level) {
+    private Date plusDays(Date orderDate, String brand, String level) {
         Calendar c = Calendar.getInstance();
         c.setTime(orderDate);
-        int numberDays = PriceList.returnDays(level);
+        int numberDays = PriceList.returnNumberDays(brand, level);
         c.add(Calendar.DATE, numberDays);
         return c.getTime();
     }

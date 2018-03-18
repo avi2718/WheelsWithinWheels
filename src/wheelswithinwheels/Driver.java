@@ -24,6 +24,7 @@ public class Driver {
     Support s = new Support();
     TransactionDatabase td = new TransactionDatabase();
     CustomerDatabase cd = new CustomerDatabase();
+    PriceList pl = new PriceList();
 
 
     public void driver() {
@@ -114,31 +115,30 @@ public class Driver {
     }
 
     private void help() {
-        System.out.println("Welcome to Wheels Within Wheels bike shop system! "
+        System.out.println("Welcome to the Wheels Within Wheels bike shop system! "
                 + "\nThese are the available commands. "
                 + "\nItems in parentheses are values determined by you. "
                 + "The parentheses themselves should not be included. "
-                + "\nquit \nQuits the system without saving \nhelp "
-                + "\nDisplays this help message \naddrp (brand) (level) (price) (days) "
-                + "\nAdds a new repair pricing option to the system with the given options "
+                + "\nquit \n \t Quits the system without saving \nhelp "
+                + "\n \t Displays this help message \naddrp (brand) (level) (price) (days) "
+                + "\n \t Adds a new repair pricing option to the system with the given options "
                 + "\naddc (firstName) (lastName) "
-                + "\nAdds a customer with the given options to the system "
+                + "\n \t Adds a customer with the given options to the system "
                 + "\naddo (customerNumber) (date) (brand) (level) (comment) "
-                + "\nAdds an order to the system with the given options and an optional comment. "
+                + "\n \t Adds an order to the system with the given options and an optional comment. "
                 + "\naddp (customerNumber) (date) (amount) "
-                + "\naddrp (brand) (level) (price) (days) Adds an repair type and price "
-                + "\nTells the system that a given customer has made a payment of a certain amount. "
+                + "\n \t Tells the system that a given customer has made a payment of a certain amount. "
                 + "\ncomp (orderNumber) (completionDate) "
-                + "\nTells the system that a given order was completed on a given date "
-                + "\nprintrp \nPrints a list of the repair prices \nprintcnum "
-                + "\nPrints a list of all customers by customer number \nprintcname "
-                + "\nPrints a list of all customers by customer name \nprinto "
-                + "\nPrints a list of all orders \nprintp \nPrints a list of all payments "
-                + "\nprintt \nPrints a list of all transactions \nprintr "
-                + "\nPrints a list of all recievables \nprints \nPrints a list of all statements "
-                + "\nreadc \nInstead of typing in commands, this reads them in from a text file with a given filename "
-                + "\nsavebs \nSaves the current state of the bikeshop in a file with a given name "
-                + "\nrestorebs \nRestores a previously saved version of the bike shop so it can be worked on");
+                + "\n \t Tells the system that a given order was completed on a given date "
+                + "\nprintrp \n \t Prints a list of the repair prices \nprintcnum "
+                + "\n \t Prints a list of all customers by customer number \nprintcname "
+                + "\n \t Prints a list of all customers by customer name \nprinto "
+                + "\n \t Prints a list of all orders \nprintp \n \t Prints a list of all payments "
+                + "\nprintt \n \t Prints a list of all transactions \nprintr "
+                + "\n \t Prints a list of all recievables \nprints \n \t Prints a list of all statements "
+                + "\nreadc (filename) \n \t Instead of typing in commands, this reads them in from a text file with a given filename "
+                + "\nsavebs (filename) \n \t Saves the current state of the bikeshop in a file with a given name "
+                + "\nrestorebs (filename) \n \tRestores a previously saved version of the bike shop so it can be worked on");
     }
 
     private boolean isStringFloat(String s)
@@ -176,38 +176,35 @@ public class Driver {
         return false;
     }
 }
-    
- //The add functions never actually add the data to the databases
      
     private void addrp(String[] params){   
         if (params.length != 5) {System.out.println("Incorrect number of parameters"); return;} 
-        if (params[1] instanceof String && params[2] instanceof String && isStringFloat(params[3]) && isStringInt(params[4])){
-           RepairPrice newrp = new RepairPrice(params[1], params[2], Float.parseFloat(params[3]), Integer.parseInt(params[4]));
-           PriceList.prices[PriceList.prices.length + 1] = (newrp);
+        if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])){
+           pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
         } else{
             System.out.println("Incorrect type of one or more parameters");
         }
     }
 
-    
    
     private void addc(String[] params) {
         if (params.length != 3) {System.out.println("Incorrect number of parameters"); return;} 
-        Customer newc = new Customer(params[1], params[2]);
-        
+        cd.addCustomer(params[1], params[2]);
     }
 
     private void addo(String[] params) {
         if (!(params.length >= 5)) {System.out.println("Incorrect number of parameters"); return;} 
-        if (isStringInt(params[1]) && isStringDate(params[2]) && isStringFloat(params[3]) && isStringInt(params[4])){
-            Order newo = new Order(Integer.parseInt(params[1]), (params[2]), Float.parseFloat(params[3]), params[4], params[5]);
+        if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])){
+            try {td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], params[5]);} 
+            catch (ParseException e) { System.out.println("Invalid date");}
         }
     }
 
     private void addp(String[] params) {
         if ((params.length != 4)) {System.out.println("Incorrect number of parameters"); return;} 
-        if (isStringInt(params[1]) && isStringFloat(params[2]) && isStringDate(params[3])){
-            Payment newp = new Payment(Integer.parseInt(params[1]), Float.parseFloat(params[2]), (params[3]));
+        if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && isStringInt(params[3])){
+            try{td.addPayment(Integer.parseInt(params[1]), formatter.parse(params[2]), Integer.parseInt(params[3])); }
+            catch (ParseException e) {System.out.println("Invalid date");}
         }
     }
 
@@ -231,19 +228,19 @@ public class Driver {
     }
 
     private void printo() {
-        td.printOrders();
+        TransactionDatabase.printOrders();
     }
 
     private void printp() {
-        td.printPayments();
+        TransactionDatabase.printPayments();
     }
 
     private void printt() {
-        td.printTransactions();
+        TransactionDatabase.printTransactions();
     }
 
     private void printr() {
-        td.printRecievables();
+        td.printReceivables();
     }
    
     private void prints() {

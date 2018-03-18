@@ -12,13 +12,14 @@ package wheelswithinwheels;
 public class RepairPrice {
     public String brand;
     public String level;
-    public Float price;
+    public int price;
     public int days;
     
-    public RepairPrice(String brand, String level, Float price ) {
+    public RepairPrice(String brand, String level, int price, int days ) {
         this.brand = brand;
         this.level = level;
         this.price = price;
+        this.days = days;
     }
     
     public String savableString() {

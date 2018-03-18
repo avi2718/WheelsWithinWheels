@@ -13,16 +13,24 @@ package wheelswithinwheels;
 import java.util.*;
 
 public class TransactionDatabase {
-    public static Map<Integer, Transaction> transactions;
+    public static ArrayList<Transaction> transactions;
     
     public static void printTransactions() {
-        for (Transaction t : transactions.values()) {
+        for (Transaction t : transactions) {
             System.out.println(t);
         }
     }
     
+    public static void addOrder(int customerNumber, Date date, String brand, String level, String comment) {
+        Order o = new Order(customerNumber, date, brand, level, comment); 
+        transactions.add(o);
+    }
+    
+    public static void addPayment(int customerNumber, Date date, int amount) {
+        Payment p = new Payment(customerNumber, date, amount);
+    }
     public static void printPayments() {
-        for (Transaction t : transactions.values()) {
+        for (Transaction t : transactions) {
             if (t.type == TransactionType.PAYMENT) {
                 System.out.println(t);
             }
@@ -30,7 +38,7 @@ public class TransactionDatabase {
     }
     
     public static void printOrders() {
-        for (Transaction t : transactions.values()) {
+        for (Transaction t : transactions) {
             if (t.type == TransactionType.ORDER) {
                 System.out.println(t);
             }
@@ -39,7 +47,7 @@ public class TransactionDatabase {
     
     public String savableString() {
         String s = "";
-        for (Transaction t : transactions.values()) {
+        for (Transaction t : transactions) {
             s += t.savableString() + "\n";
         }
         return s;

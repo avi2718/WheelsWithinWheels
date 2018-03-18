@@ -14,11 +14,11 @@ import java.util.Date;
 
 public class Payment {
     public int customerNumber;
-    public Float amount;
+    public int amount;
     public Date paymentDate;
     public TransactionType type = TransactionType.PAYMENT;
     
-    public Payment(int cn, Float a, Date pd) {
+    public Payment(int cn, Date pd, int a) {
         customerNumber = cn;
         amount = a;
         paymentDate = pd;

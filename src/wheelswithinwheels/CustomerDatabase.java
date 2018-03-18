@@ -28,6 +28,19 @@ public class CustomerDatabase {
         return null;
     }
     
+    public void addCustomer(String firstName, String lastName) {
+        Customer c = new Customer(firstName, lastName);
+        customers.put(c.customerNumber, c);
+    }
+    
+    public boolean isValidCustomerID(String customerID) {
+        try {
+            return customers.containsKey(Integer.parseInt(customerID));
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+    
     public String savableString() {
         String s = "";
         for (Customer c : customers.values()) {
