@@ -11,6 +11,7 @@ package wheelswithinwheels;
  */
 import java.util.*;
 public class Order extends Transaction {
+    public int orderNumber; 
     public int customerNumber;
     public Date orderDate;
     public String brand;
@@ -22,6 +23,8 @@ public class Order extends Transaction {
     public TransactionType type = TransactionType.ORDER;
     
     public Order(int customerNumber, Date orderDate, String brand, String level, String comment) {
+        orderNumber = Transaction.transactionNumberCounter; 
+        Transaction.transactionNumberCounter++;
         this.customerNumber = customerNumber;
         this.orderDate = orderDate;
         this.brand = brand;

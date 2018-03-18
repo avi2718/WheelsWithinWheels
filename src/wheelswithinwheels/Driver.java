@@ -25,6 +25,7 @@ public class Driver {
     TransactionDatabase td = new TransactionDatabase();
     CustomerDatabase cd = new CustomerDatabase();
     PriceList pl = new PriceList();
+    Boolean isSaved = true; 
 
 
     public void driver() {
@@ -38,6 +39,7 @@ public class Driver {
     }
 
     private boolean driverCycle(String nextLine) {
+        isSaved = false;
         String[] line = s.splitStringIntoParts(nextLine);
         switch (line[0]) {
             case "quit":
@@ -111,7 +113,8 @@ public class Driver {
     }
 
     private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
-        return (true);
+        System.exit(0);
+        return true;
     }
 
     private void help() {
@@ -135,7 +138,7 @@ public class Driver {
                 + "\n \t Prints a list of all customers by customer name \nprinto "
                 + "\n \t Prints a list of all orders \nprintp \n \t Prints a list of all payments "
                 + "\nprintt \n \t Prints a list of all transactions \nprintr "
-                + "\n \t Prints a list of all recievables \nprints \n \t Prints a list of all statements "
+                + "\n \t Prints a list of all receivables \nprints \n \t Prints a list of all statements "
                 + "\nreadc (filename) \n \t Instead of typing in commands, this reads them in from a text file with a given filename "
                 + "\nsavebs (filename) \n \t Saves the current state of the bikeshop in a file with a given name "
                 + "\nrestorebs (filename) \n \tRestores a previously saved version of the bike shop so it can be worked on");
@@ -210,8 +213,9 @@ public class Driver {
 
     private void comp(String[] params) {
         if ((params.length != 3)) {System.out.println("Incorrect number of parameters"); return;} 
-        if (isStringInt(params[1]) && isStringDate(params[2])){
-            
+        if (td.isValidOrder(params[1]) && isStringDate(params[2])){
+            try{td.completeOrder(Integer.parseInt(params[1]), formatter.parse(params[2]));}
+            catch (ParseException e) {System.out.println("Invalid date");}
         }
     }
 
@@ -254,6 +258,7 @@ public class Driver {
     private void savebs(String filename) {
         String bikeShopAsString = td.savableString() + cd.savableString();
         s.writeTextFile(filename, bikeShopAsString);
+        isSaved = true;
     }
 
     private void restorebs(String filename) {

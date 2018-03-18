@@ -10,6 +10,7 @@ package wheelswithinwheels;
  * @author bhairavi
  */
 abstract class Transaction {
+    public static int transactionNumberCounter = 0;
     public TransactionType type;
     
     abstract public String savableString();

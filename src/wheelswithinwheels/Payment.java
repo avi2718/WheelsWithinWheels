@@ -12,16 +12,19 @@ package wheelswithinwheels;
  */
 import java.util.Date;
 
-public class Payment {
+public class Payment extends Transaction{
     public int customerNumber;
     public int amount;
     public Date paymentDate;
+    public int paymentNumber; 
     public TransactionType type = TransactionType.PAYMENT;
     
     public Payment(int cn, Date pd, int a) {
         customerNumber = cn;
         amount = a;
         paymentDate = pd;
+        paymentNumber = Transaction.transactionNumberCounter;
+        Transaction.transactionNumberCounter++;
     }
     
     public String toString() {
