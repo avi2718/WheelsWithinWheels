@@ -46,6 +46,6 @@ public class Order extends Transaction {
     }
     
     public String savableString() {
-        return "addo" + customerNumber + orderDate + brand + level + comment;
+        return "addo " + customerNumber + " " + orderDate + " " + brand + " " + level + " " + comment;
     }
 }
