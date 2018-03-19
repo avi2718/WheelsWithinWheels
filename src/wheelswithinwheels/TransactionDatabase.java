@@ -13,7 +13,7 @@ package wheelswithinwheels;
 import java.util.*;
 
 public class TransactionDatabase {
-    public static Map<Integer, Transaction> transactions;
+    public static Map<Integer, Transaction> transactions = new HashMap<Integer, Transaction>();
     
     public static void printTransactions() {
         for (Transaction t : transactions.values()) {
