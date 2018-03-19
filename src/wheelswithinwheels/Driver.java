@@ -73,6 +73,9 @@ public class Driver {
             case "printo":
                 printo();
                 break;
+            case "printc":
+                printc();
+                break;
             case "printp":
                 printp();
                 break;
@@ -231,6 +234,10 @@ public class Driver {
             }
         }
     }
+    
+    private void printc() {//Please add this fucntion Shai
+        
+    }
 
     private void printrp() {
         PriceList.printList();
@@ -343,6 +350,9 @@ public class Driver {
                 break;
             case "printo":
                 printo();
+                break;
+                case "printc":
+                printc();
                 break;
             case "printp":
                 printp();
