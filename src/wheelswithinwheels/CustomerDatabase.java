@@ -10,10 +10,11 @@ package wheelswithinwheels;
  * @author Shai
  */
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CustomerDatabase {
-    public static Map<Integer, Customer> customers;
+    public static Map<Integer, Customer> customers = new HashMap<Integer, Customer>();
     
     public static Customer findByNumber(int customerNumber) {
         return customers.get(customerNumber);
@@ -23,7 +24,7 @@ public class CustomerDatabase {
         for (Customer c : customers.values()) {
             if (c.firstName == customerFirstName && c.lastName == customerLastName) {
                 return c;
-            }
+            }s
         }
         return null;
     }
