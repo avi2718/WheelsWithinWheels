@@ -24,7 +24,7 @@ public class CustomerDatabase {
         for (Customer c : customers.values()) {
             if (c.firstName == customerFirstName && c.lastName == customerLastName) {
                 return c;
-            }s
+            }
         }
         return null;
     }
