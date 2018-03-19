@@ -291,6 +291,17 @@ public class Driver {
         }
         Customer.customerNumberCounter = cn;
     }
+    
+    private void rnon(String orderNumber) {
+        int on = 0;
+        try {
+            on = Integer.parseInt(orderNumber);
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid Order Number");
+        }
+        Transaction.transactionNumberCounter = on;
+    }
 
     private boolean restoreDriverCycle(String nextLine) {
         isSaved = false;
@@ -368,7 +379,16 @@ public class Driver {
                 if (line.length == 2) {
                     rncn(line[1]);
                 }
+                else {
+                    System.out.println("Bad Input");
+                }
                 break;
+            case "rnon": 
+                if (line.length == 2) {
+                    rnon(line[1]);
+                } else {
+                    System.out.println("Bad Input");
+                }
             default:
                 System.out.println("Invalid Command\n");
                 break;
