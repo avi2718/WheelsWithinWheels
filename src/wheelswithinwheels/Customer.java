@@ -10,7 +10,7 @@ package wheelswithinwheels;
  * @author bhairavi
  */
 public class Customer {
-    private static int customerNumberCounter = 0;
+    public static int customerNumberCounter = 0;
     public String firstName;
     public String lastName;
     public int customerNumber;
