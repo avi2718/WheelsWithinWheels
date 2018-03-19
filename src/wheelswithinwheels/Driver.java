@@ -89,7 +89,7 @@ public class Driver {
                 if (line.length == 2) {
                     readc(line[1]);
                 } else {
-                    System.out.print("Bad Input\n");
+                    System.out.println("Bad Input");
                 }
                 break;
             case "restorebs":
@@ -97,18 +97,18 @@ public class Driver {
                 if (line.length == 2) {
                     restorebs(line[1]);
                 } else {
-                    System.out.println("Bad Input\n");
+                    System.out.println("Bad Input");
                 }
                 break;
             case "savebs":
                 if (line.length == 2) {
                     savebs(line[1]);
                 } else {
-                    System.out.print("Bad Input\n");
+                    System.out.println("Bad Input");
                 }
                 break;
             default:
-                System.out.print("Invalid Command\n");
+                System.out.println("Invalid Command");
                 break;
         }
         return true;
@@ -235,8 +235,8 @@ public class Driver {
         }
     }
     
-    private void printc() {//Please add this fucntion Shai
-        
+    private void printc() {
+        td.printCustomers();
     }
 
     private void printrp() {
@@ -375,14 +375,14 @@ public class Driver {
                 if (line.length == 2) {
                     restorebs(line[1]);
                 } else {
-                    System.out.println("Bad Input\n");
+                    System.out.println("Bad Input");
                 }
                 break;
             case "savebs":
                 if (line.length == 2) {
                     savebs(line[1]);
                 } else {
-                    System.out.print("Bad Input\n");
+                    System.out.println("Bad Input");
                 }
                 break;
             case "rncn":
@@ -401,7 +401,7 @@ public class Driver {
                 }
                 break;
             default:
-                System.out.println("Invalid Command\n");
+                System.out.println("Invalid Command");
                 break;
         }
         return true;
