@@ -32,7 +32,7 @@ public class Payment extends Transaction{
     }
     
     public String savableString() {
-        return "addp" + customerNumber + paymentDate + amount;
+        return "addp " + customerNumber + " " + paymentDate + " " + amount;
     }
 }
 
