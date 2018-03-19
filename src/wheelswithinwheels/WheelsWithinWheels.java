@@ -15,7 +15,9 @@ public class WheelsWithinWheels {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Driver driver = new Driver();
+        driver.driver();
     }
     
 }
