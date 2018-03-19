@@ -23,6 +23,6 @@ public class RepairPrice {
     }
     
     public String savableString() {
-        return "addrp" + brand + level + price + days;
+        return "addrp " + brand + " " + level + " " + price + " " + days;
     }
 }
