@@ -389,6 +389,7 @@ public class Driver {
                 } else {
                     System.out.println("Bad Input");
                 }
+                break;
             default:
                 System.out.println("Invalid Command\n");
                 break;
