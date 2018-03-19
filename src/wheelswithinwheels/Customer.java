@@ -23,6 +23,6 @@ public class Customer {
     }
     
     public String savableString() {
-        return "addc" + this.firstName + this.lastName;
+        return "addc " + this.firstName + " " + this.lastName;
     }
 }
