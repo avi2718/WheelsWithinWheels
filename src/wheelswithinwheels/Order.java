@@ -9,10 +9,13 @@ package wheelswithinwheels;
  *
  * @author Shai
  */
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 public class Order extends Transaction {
     public int orderNumber; 
     public int customerNumber;
+    public String saveableDate;
     public Date orderDate;
     public String brand;
     public String level;
@@ -22,22 +25,35 @@ public class Order extends Transaction {
     public Date completionDate;
     public TransactionType type = TransactionType.ORDER;
     
-    public Order(int customerNumber, Date orderDate, String brand, String level, String comment) {
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMddyyyy");
+    
+    public Order(int customerNumber, String saveableDate, String brand, String level, String comment) {
         orderNumber = Transaction.transactionNumberCounter; 
         Transaction.transactionNumberCounter++;
         this.customerNumber = customerNumber;
-        this.orderDate = orderDate;
+        this.saveableDate = saveableDate;
+        try {
+            this.orderDate = dateFormatter.parse(saveableDate);
+        } catch (ParseException p) {
+            System.out.println("Invalid Date");
+        }
         this.brand = brand;
         this.level = level;
         this.comment = comment;
         this.repairPrice = PriceList.returnPrice(brand, level);
         promiseDate = plusDays(orderDate, brand, level);
     }
-    public Order(int customerNumber, Date orderDate, String brand, String level) {
+    public Order(int customerNumber, String saveableDate, String brand, String level) {
         orderNumber = Transaction.transactionNumberCounter; 
         Transaction.transactionNumberCounter++;
         this.customerNumber = customerNumber;
-        this.orderDate = orderDate;
+        this.customerNumber = customerNumber;
+        this.saveableDate = saveableDate;
+        try {
+            this.orderDate = dateFormatter.parse(saveableDate);
+        } catch (ParseException p) {
+            System.out.println("Invalid Date");
+        }
         this.brand = brand;
         this.level = level;
         promiseDate = plusDays(orderDate, brand, level);
@@ -56,6 +72,6 @@ public class Order extends Transaction {
     }
     
     public String savableString() {
-        return "addo " + customerNumber + " " + orderDate + " " + brand + " " + level + " " + comment;
+        return "addo " + customerNumber + " " + saveableDate + " " + brand + " " + level + " " + comment;
     }
 }
