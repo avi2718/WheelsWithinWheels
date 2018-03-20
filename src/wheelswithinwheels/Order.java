@@ -70,9 +70,9 @@ public class Order extends Transaction {
     }
     
     public String toString() {
-        return s.fitD(orderDate, 10, false) + s.fitI(customerNumber, 5, false) + 
-                s.fit(brand, 10, false) + s.fit(level, 12, false) + s.fitI(repairPrice, 5, false)
-                + s.fitD(promiseDate, 10, false) + "     " + comment;
+        return s.fitD(orderDate, 12, true) + s.fitI(customerNumber, 10, true) + 
+                s.fit(brand, 15, true) + s.fit(level, 12, true) + "$" + s.fitI(repairPrice, 5, true)
+                + s.fitD(promiseDate, 12, true) + "     " + comment;
     }
     
     public String savableString() {

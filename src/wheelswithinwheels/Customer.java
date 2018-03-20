@@ -27,6 +27,6 @@ public class Customer {
     }
     
     public String toString() {
-        return customerNumber + "\t\t\t" + firstName + " " + lastName; 
+        return Support.fitI(customerNumber, 24, true) + Support.fit(firstName + " " + lastName, 20, true); 
     }
 }

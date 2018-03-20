@@ -32,7 +32,8 @@ public class PriceList {
     }
     
     public static void printList(){
-        System.out.println("BRAND\t\tLEVEL\tPRICE\tDAYS");
+        System.out.println(Support.fit("BRAND", 15, true) + Support.fit("LEVEL", 12, true) + Support.fit("PRICE", 10, true)
+        + Support.fit("DAYS", 5, true));
         for (RepairPrice p : prices) {
             System.out.println(p);
         }

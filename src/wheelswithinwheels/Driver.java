@@ -286,7 +286,7 @@ public class Driver {
     private String putCommentBackTogether(String[] params, int start) {
         String cs = "";
         for (int p = start; p < params.length; p++) {
-            cs += params[p];
+            cs += " " + params[p];
         }
         return cs;
     }

@@ -27,6 +27,7 @@ public class RepairPrice {
     }
     
     public String toString() {
-        return brand + "\t" + level + "\t$" + price + "\t" + days; 
+        return Support.fit(brand, 15, true) + Support.fit(level, 12, true) + "$" + 
+                Support.fit(Integer.toString(price), 9, true) + Support.fit(Integer.toString(days), 5, true); 
     }
 }

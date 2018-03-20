@@ -40,7 +40,7 @@ public class Payment extends Transaction{
     }
     
     public String toString() {
-        return s.fitD(paymentDate, 10, false) + customerNumber + amount;
+        return s.fitD(paymentDate, 12, true) + s.fitI(customerNumber,10, true) + "$" + s.fitI(amount,9,true);
     }
     
     public String savableString() {
