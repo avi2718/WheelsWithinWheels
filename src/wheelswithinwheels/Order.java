@@ -23,7 +23,6 @@ public class Order extends Transaction {
     public String comment = "";
     public Date promiseDate;
     public Date completionDate;
-    public TransactionType type = TransactionType.ORDER;
     
     SimpleDateFormat dateFormatter = new SimpleDateFormat("MMddyyyy");
     
@@ -42,7 +41,9 @@ public class Order extends Transaction {
         this.comment = comment;
         this.repairPrice = PriceList.returnPrice(brand, level);
         promiseDate = plusDays(orderDate, brand, level);
+        super.type = TransactionType.ORDER;
     }
+    
     public Order(int customerNumber, String saveableDate, String brand, String level) {
         orderNumber = Transaction.transactionNumberCounter; 
         Transaction.transactionNumberCounter++;
@@ -57,6 +58,7 @@ public class Order extends Transaction {
         this.brand = brand;
         this.level = level;
         promiseDate = plusDays(orderDate, brand, level);
+        super.type = TransactionType.ORDER;
     }
     
     private Date plusDays(Date orderDate, String brand, String level) {

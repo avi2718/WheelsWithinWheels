@@ -85,6 +85,9 @@ public class Driver {
             case "prints":
                 prints();
                 break;
+            case "printr":
+                printr();
+                break;
             case "readc":
                 if (line.length == 2) {
                     readc(line[1]);
@@ -273,7 +276,7 @@ public class Driver {
     }
 
     private void printr() {
-        td.printReceivables();
+        TransactionDatabase.printReceivables();
     }
 
     private void prints() {

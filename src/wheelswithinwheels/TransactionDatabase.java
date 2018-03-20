@@ -72,11 +72,19 @@ public class TransactionDatabase {
             if (t.type == TransactionType.ORDER) {
                 Order o = (Order) t;
                 Customer c = CustomerDatabase.findByNumber(o.customerNumber);
+                receivablesMap.putIfAbsent(c, 0);
                 receivablesMap.put(c, receivablesMap.get(c) + o.repairPrice);
             } else if (t.type == TransactionType.PAYMENT) {
                 Payment p = (Payment) t;
                 Customer c = CustomerDatabase.findByNumber(p.customerNumber);
+                receivablesMap.putIfAbsent(c, 0);
                 receivablesMap.put(c, -1 * p.amount);
+            }
+        }
+        System.out.println("CUSTOMER NUMBER \t CUSTOMER NAME \t\t AMOUNT OWED");
+        for (Customer c: receivablesMap.keySet()) {
+            if(receivablesMap.get(c) != 0) {
+                System.out.println("\t" + c.customerNumber + "\t\t  " + c.firstName + " " + c.lastName + "\t\t  " + receivablesMap.get(c));
             }
         }
     }

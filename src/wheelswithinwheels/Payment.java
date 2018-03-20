@@ -23,8 +23,6 @@ public class Payment extends Transaction{
     
     SimpleDateFormat dateFormatter = new SimpleDateFormat("MMddyyyy");
     
-    public TransactionType type = TransactionType.PAYMENT;
-    
     public Payment(int cn, String saveableDate, int a) {
         customerNumber = cn;
         amount = a;
@@ -38,6 +36,7 @@ public class Payment extends Transaction{
         
         paymentNumber = Transaction.transactionNumberCounter;
         Transaction.transactionNumberCounter++;
+        super.type = TransactionType.PAYMENT;
     }
     
     public String toString() {

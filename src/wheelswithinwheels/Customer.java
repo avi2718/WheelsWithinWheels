@@ -27,6 +27,6 @@ public class Customer {
     }
     
     public String toString() {
-        return customerNumber + "\t\t\t" + firstName + lastName; 
+        return customerNumber + "\t\t\t" + firstName + " " + lastName; 
     }
 }

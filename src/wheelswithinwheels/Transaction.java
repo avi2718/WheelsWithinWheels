@@ -11,7 +11,6 @@ package wheelswithinwheels;
  */
 abstract class Transaction {
     public static int transactionNumberCounter = 0;
-    public TransactionType type;
-    
+    public TransactionType type = TransactionType.ABSTRACT;
     abstract public String savableString();
 }

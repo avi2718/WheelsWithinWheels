@@ -11,5 +11,6 @@ package wheelswithinwheels;
  */
 public enum TransactionType {
     ORDER, 
-    PAYMENT
+    PAYMENT, 
+    ABSTRACT
 }
