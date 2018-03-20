@@ -201,6 +201,9 @@ public class Driver {
             System.out.println("Incorrect number of parameters");
             return;
         }
+        
+        //System.out.println("ID: " + cd.isValidCustomerID(params[1]) + "Date: " + isStringDate(params[2]) + "Brand: " + pl.isValidBrand(params[3]) + "Level: " + pl.isValidLevel(params[4]));
+        
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
                 formatter.parse(params[2]);
@@ -296,7 +299,7 @@ public class Driver {
     }
 
     private void savebs(String filename) {
-        String bikeShopAsString = td.savableString() + cd.savableString();
+        String bikeShopAsString = cd.savableString() + pl.savableString() + td.savableString();
         s.writeTextFile(filename, bikeShopAsString);
         isSaved = true;
     }
