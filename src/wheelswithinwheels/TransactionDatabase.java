@@ -64,6 +64,21 @@ public class TransactionDatabase {
         }
     }
     
+    public static void printReceivables() {
+        Map<Customer, Integer> receivablesMap = new HashMap();
+        for (Transaction t : transactions.values()) {
+            if (t.type == TransactionType.ORDER) {
+                Order o = (Order) t;
+                Customer c = CustomerDatabase.findByNumber(o.customerNumber);
+                receivablesMap.put(c, receivablesMap.get(c) + o.repairPrice);
+            } else if (t.type == TransactionType.PAYMENT) {
+                Payment p = (Payment) t;
+                Customer c = CustomerDatabase.findByNumber(p.customerNumber);
+                receivablesMap.put(c, -1 * p.amount);
+            }
+        }
+    }
+    
     public String savableString() {
         String s = "";
         for (Transaction t : transactions.values()) {

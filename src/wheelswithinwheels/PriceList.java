@@ -57,8 +57,17 @@ public class PriceList {
     
     public static int returnNumberDays(String brand, String level) {
         for (RepairPrice rp: prices) {
-            if(rp.brand == brand && rp.level == level) {
+            if(rp.brand.equals(brand) && rp.level.equals(level)) {
                 return rp.days;
+            }
+        }
+        return 0;
+    }
+    
+    public static int returnPrice(String brand, String level) {
+        for (RepairPrice rp: prices) {
+            if(rp.brand.equals(brand) && rp.level.equals(level)) {
+                return rp.price;
             }
         }
         return 0;

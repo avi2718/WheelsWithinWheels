@@ -16,7 +16,7 @@ public class Order extends Transaction {
     public Date orderDate;
     public String brand;
     public String level;
-    public Float repairPrice;
+    public int repairPrice;
     public String comment = "";
     public Date promiseDate;
     public Date completionDate;
@@ -30,6 +30,7 @@ public class Order extends Transaction {
         this.brand = brand;
         this.level = level;
         this.comment = comment;
+        this.repairPrice = PriceList.returnPrice(brand, level);
         promiseDate = plusDays(orderDate, brand, level);
     }
     public Order(int customerNumber, Date orderDate, String brand, String level) {
