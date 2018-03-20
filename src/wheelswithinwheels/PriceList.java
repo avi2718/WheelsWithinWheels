@@ -21,7 +21,6 @@ public class PriceList {
     public static void addRepairPrice(String brand, String level, int price, int days) {
         RepairPrice rp = new RepairPrice(brand, level, price, days);
         for (RepairPrice p : prices) {
-            System.out.println("for loop");
             if (p.brand.equals(rp.brand) && p.level.equals(rp.level)) {
                 prices.remove(p);
                 break;
