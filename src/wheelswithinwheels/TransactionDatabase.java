@@ -10,6 +10,8 @@ package wheelswithinwheels;
  * @author Shai
  */
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TransactionDatabase {
@@ -21,14 +23,14 @@ public class TransactionDatabase {
         }
     }
     
-    public static void addOrder(int customerNumber, Date date, String brand, String level, String comment) {
-        Order o = new Order(customerNumber, date, brand, level, comment); 
-        transactions.put(o.orderNumber, o);
+    public static void addOrder(int customerNumber, String date, String brand, String level, String comment){
+            Order o = new Order(customerNumber, date, brand, level, comment);
+            transactions.put(o.orderNumber, o);
     }
     
-    public static void addOrderNoComment(int customerNumber, Date date, String brand, String level) {
-        Order o = new Order(customerNumber, date, brand, level); 
-        transactions.put(o.orderNumber, o);
+    public static void addOrderNoComment(int customerNumber, String date, String brand, String level) {
+            Order o = new Order(customerNumber, date, brand, level);
+            transactions.put(o.orderNumber, o);
     }
     
     public static boolean isValidOrder(String orderNumber) {
