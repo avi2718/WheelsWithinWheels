@@ -10,19 +10,32 @@ package wheelswithinwheels;
  *
  * @author bhairavi
  */
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Payment extends Transaction{
     public int customerNumber;
     public int amount;
+    private String saveableDate;
     public Date paymentDate;
     public int paymentNumber; 
+    
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMddyyyy");
+    
     public TransactionType type = TransactionType.PAYMENT;
     
-    public Payment(int cn, Date pd, int a) {
+    public Payment(int cn, String saveableDate, int a) {
         customerNumber = cn;
         amount = a;
-        paymentDate = pd;
+        
+        this.saveableDate = saveableDate;
+        try {
+            this.paymentDate = dateFormatter.parse(saveableDate);
+        } catch (ParseException p) {
+            System.out.println("Invalid Date");
+        }
+        
         paymentNumber = Transaction.transactionNumberCounter;
         Transaction.transactionNumberCounter++;
     }
@@ -32,7 +45,7 @@ public class Payment extends Transaction{
     }
     
     public String savableString() {
-        return "addp " + customerNumber + " " + paymentDate + " " + amount;
+        return "addp " + customerNumber + " " + saveableDate + " " + amount;
     }
 }
 
