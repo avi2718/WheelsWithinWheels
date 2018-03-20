@@ -179,7 +179,14 @@ public class Driver {
             return;
         }
         if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])) {
+            System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
+            Scanner input = new Scanner(System.in);
+            if(input.next() == "y"){
             pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
+        }else{
+                System.out.println("Enter information again");
+                }
+       
         } else {
             System.out.println("Incorrect type of one or more parameters");
         }
@@ -200,7 +207,13 @@ public class Driver {
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
+                System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
+            Scanner input = new Scanner(System.in);
+            if(input.next() == "y"){
                 td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], params[5]);
+            } else{
+                System.out.println("Incorrect type of one or more parameters");
+            }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
@@ -214,7 +227,13 @@ public class Driver {
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && isStringInt(params[3])) {
             try {
+                System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
+            Scanner input = new Scanner(System.in);
+            if(input.next() == "y"){
                 td.addPayment(Integer.parseInt(params[1]), formatter.parse(params[2]), Integer.parseInt(params[3]));
+            }else{
+                System.out.println("Incorrect type of one or more parameters");
+            }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
@@ -228,7 +247,13 @@ public class Driver {
         }
         if (td.isValidOrder(params[1]) && isStringDate(params[2])) {
             try {
+                System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
+            Scanner input = new Scanner(System.in);
+            if(input.next() == "y"){
                 td.completeOrder(Integer.parseInt(params[1]), formatter.parse(params[2]));
+            }else{
+                System.out.println("Incorrect type of one or more parameters");
+            }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
