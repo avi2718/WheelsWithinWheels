@@ -203,8 +203,15 @@ public class Driver {
         }
         System.out.println("Is this information correct: " + "creating new customer with name " + params[1] + " " + params[2]
         + "\n Enter (y/n)");
-        cd.addCustomer(params[1], params[2]);
-        System.out.println("Created new customer.");
+        Scanner input = new Scanner(System.in);
+        if(input.nextLine().equals("y")){
+                cd.addCustomer(params[1], params[2]);
+                System.out.println("Created new customer.");
+                return;
+            } else{
+                System.out.println("Please re-enter data");
+                return;
+                }
     }
 
     private void addo(String[] params) {
@@ -268,7 +275,7 @@ public class Driver {
     }
     
     private void printc() {
-        td.printCustomers();
+        cd.printCustomers();
     }
 
     private void printrp() {

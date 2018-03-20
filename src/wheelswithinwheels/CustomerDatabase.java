@@ -42,6 +42,13 @@ public class CustomerDatabase {
         }
     }
     
+    public void printCustomers() {
+        System.out.println("CUSTOMER NUMBER" + "\t\tCUSTOMER NAME"); 
+        for (Customer c : customers.values()) {
+            System.out.println(c);
+        }
+    }
+    
     public String savableString() {
         String s = "";
         for (Customer c : customers.values()) {
