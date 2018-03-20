@@ -200,12 +200,14 @@ public class Driver {
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
+                formatter.parse(params[2]);
+                
                 if (params.length == 5) {
-                    td.addOrderNoComment(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4]);
+                    td.addOrderNoComment(Integer.parseInt(params[1]), params[2], params[3], params[4]);
                 } else {
-                    td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], putCommentBackTogether(params, 5));
+                    td.addOrder(Integer.parseInt(params[1]), params[2], params[3], params[4], putCommentBackTogether(params, 5));
                 }
-            } catch (ParseException e) {
+            } catch (ParseException | NumberFormatException n) {
                 System.out.println("Invalid date");
             }
         } else {
