@@ -187,7 +187,7 @@ public class Driver {
         if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])) {
             pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
         } else {
-            System.out.println("Incorrect type of one or more parameters");
+            System.out.println("Something you have entered is not a number or date");
             return;
         }
     }
@@ -220,7 +220,7 @@ public class Driver {
                 System.out.println("Invalid date");
             }
         } else {
-            System.out.println("Incorrect type of one or more parameters");
+            System.out.println("Something you have entered is not a number or date");
         }
     }
 
@@ -292,7 +292,7 @@ public class Driver {
     private String putCommentBackTogether(String[] params, int start) {
         String cs = "";
         for (int p = start; p < params.length; p++) {
-            cs += params[p];
+            cs += params[p] + " ";
         }
         return cs;
     }
