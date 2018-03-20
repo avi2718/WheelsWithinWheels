@@ -66,10 +66,10 @@ public class Driver {
                     printrp();
                     break;
                 case "printcnum":
-                    printcnum(line);
+                    printcnum();
                     break;
                 case "printcname":
-                    printcname(line);
+                    printcname();
                     break;
                 case "printo":
                     printo();
@@ -91,9 +91,9 @@ public class Driver {
                     break;
                 case "readc":
                     if (line.length == 2) {
-                        readc(line[1]);
+                        restorebs(line[1]);
                     } else {
-                        System.out.println("Bad Input");
+                        System.out.println("Incorrect Number of Specifications");
                     }
                     break;
                 case "restorebs":
@@ -101,14 +101,14 @@ public class Driver {
                     if (line.length == 2) {
                         restorebs(line[1]);
                     } else {
-                        System.out.println("Bad Input");
+                        System.out.println("Incorrect Number of Specifications");
                     }
                     break;
                 case "savebs":
                     if (line.length == 2) {
                         savebs(line[1]);
                     } else {
-                        System.out.println("Bad Input");
+                        System.out.println("Incorrect Number of Specifications");
                     }
                     break;
                 default:
@@ -181,7 +181,7 @@ public class Driver {
 
     private void addrp(String[] params) {
         if (params.length != 5) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])) {
@@ -194,7 +194,7 @@ public class Driver {
 
     private void addc(String[] params) {
         if (params.length != 3) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         cd.addCustomer(params[1], params[2]);
@@ -202,7 +202,7 @@ public class Driver {
 
     private void addo(String[] params) {
         if (!(params.length >= 5)) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
 
@@ -226,7 +226,7 @@ public class Driver {
 
     private void addp(String[] params) {
         if ((params.length != 4)) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && isStringInt(params[3])) {
@@ -241,7 +241,7 @@ public class Driver {
 
     private void comp(String[] params) {
         if ((params.length != 3)) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         if (td.isValidOrder(params[1]) && isStringDate(params[2])) {
@@ -261,12 +261,14 @@ public class Driver {
         PriceList.printList();
     }
 
-    private void printcnum(String[] params) {
-        System.out.println(CustomerDatabase.findByNumber(Integer.parseInt(params[1])));
+    private void printcnum() {
+        cd.printcnum();
+        //System.out.println(CustomerDatabase.findByNumber(Integer.parseInt(params[1])));
     }
 
-    private void printcname(String[] params) {
-        System.out.println(CustomerDatabase.findByName(params[1], params[2]));
+    private void printcname() {
+        cd.printcname();
+        //System.out.println(CustomerDatabase.findByName(params[1], params[2]));
     }
 
     private void printo() {
@@ -295,10 +297,6 @@ public class Driver {
             cs += params[p] + " ";
         }
         return cs;
-    }
-
-    private void readc(String filename) {
-
     }
 
     private void savebs(String filename) {
@@ -390,38 +388,37 @@ public class Driver {
                 break;
             case "readc":
                 if (line.length == 2) {
-                    readc(line[1]);
+                    restorebs(line[1]);
                 } else {
-                    System.out.print("Bad Input\n");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "restorebs":
-                //System.out.println("Restoring Bike Shop");
                 if (line.length == 2) {
                     restorebs(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "savebs":
                 if (line.length == 2) {
                     savebs(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "rncn":
                 if (line.length == 2) {
                     rncn(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "rnon":
                 if (line.length == 2) {
                     rnon(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             default:
