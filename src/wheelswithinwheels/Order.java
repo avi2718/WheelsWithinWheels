@@ -13,8 +13,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 public class Order extends Transaction {
+    private Support s = new Support();
     public int orderNumber; 
-    public int customerNumber;
     public String saveableDate;
     public Date orderDate;
     public String brand;
@@ -29,7 +29,7 @@ public class Order extends Transaction {
     public Order(int customerNumber, String saveableDate, String brand, String level, String comment) {
         orderNumber = Transaction.transactionNumberCounter; 
         Transaction.transactionNumberCounter++;
-        this.customerNumber = customerNumber;
+        super.customerNumber = customerNumber;
         this.saveableDate = saveableDate;
         try {
             this.orderDate = dateFormatter.parse(saveableDate);
@@ -47,7 +47,7 @@ public class Order extends Transaction {
     public Order(int customerNumber, String saveableDate, String brand, String level) {
         orderNumber = Transaction.transactionNumberCounter; 
         Transaction.transactionNumberCounter++;
-        this.customerNumber = customerNumber;
+        super.customerNumber = customerNumber;
         this.customerNumber = customerNumber;
         this.saveableDate = saveableDate;
         try {
@@ -70,7 +70,9 @@ public class Order extends Transaction {
     }
     
     public String toString() {
-        return orderDate.toString() + customerNumber + brand + level + repairPrice + promiseDate.toString() + comment;
+        return s.fitD(orderDate, 10, false) + s.fitI(customerNumber, 5, false) + 
+                s.fit(brand, 10, false) + s.fit(level, 12, false) + s.fitI(repairPrice, 5, false)
+                + s.fitD(promiseDate, 10, false) + "     " + comment;
     }
     
     public String savableString() {

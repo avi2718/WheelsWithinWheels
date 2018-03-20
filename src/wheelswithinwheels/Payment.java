@@ -15,16 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Payment extends Transaction{
-    public int customerNumber;
     public int amount;
     private String saveableDate;
     public Date paymentDate;
     public int paymentNumber; 
+    private Support s = new Support();
     
     SimpleDateFormat dateFormatter = new SimpleDateFormat("MMddyyyy");
     
     public Payment(int cn, String saveableDate, int a) {
-        customerNumber = cn;
+        super.customerNumber = cn;
         amount = a;
         
         this.saveableDate = saveableDate;
@@ -40,7 +40,7 @@ public class Payment extends Transaction{
     }
     
     public String toString() {
-        return paymentDate.toString() + customerNumber + amount;
+        return s.fitD(paymentDate, 10, false) + customerNumber + amount;
     }
     
     public String savableString() {

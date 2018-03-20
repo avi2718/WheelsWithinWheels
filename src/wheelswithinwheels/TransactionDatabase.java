@@ -50,6 +50,7 @@ public class TransactionDatabase {
         Payment p = new Payment(customerNumber, date, amount);
         transactions.put(p.paymentNumber, p);
     }
+    
     public static void printPayments() {
         for (Transaction t : transactions.values()) {
             if (t.type == TransactionType.PAYMENT) {
@@ -85,6 +86,27 @@ public class TransactionDatabase {
         for (Customer c: receivablesMap.keySet()) {
             if(receivablesMap.get(c) != 0) {
                 System.out.println("\t" + c.customerNumber + "\t\t  " + c.firstName + " " + c.lastName + "\t\t  " + receivablesMap.get(c));
+            }
+        }
+    }
+    
+    public static void printStatements() {
+        Map<Customer, ArrayList<Transaction>> statementsMap = new HashMap();
+        for (Transaction t : transactions.values()) {
+            Customer c  = CustomerDatabase.findByNumber(t.customerNumber);
+            if (statementsMap.containsKey(c)) {
+                statementsMap.get(c).add(t);
+            } else {
+                ArrayList<Transaction> alt = new ArrayList<Transaction>();
+                alt.add(t);
+                statementsMap.put(c, alt);
+            }
+        }
+        System.out.println("CUSTOMER NUMBER \t CUSTOMER NAME ");
+        for (Customer c: statementsMap.keySet()) {
+            System.out.println(c + "\n");
+            for (Transaction a : statementsMap.get(c)) {
+                System.out.println(a);
             }
         }
     }

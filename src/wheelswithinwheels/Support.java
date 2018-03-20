@@ -82,7 +82,7 @@ public class Support {
         return s.split("\\r?\\n");
     }
     
-    public String fit(String s, int size, boolean right) {
+    public static String fit(String s, int size, boolean right) {
         String result = "";
         int sSize = s.length();
         if (sSize == size) {
@@ -103,13 +103,13 @@ public class Support {
         return addon + result;
     }
     
-    public String fitI(int i, int size, boolean right) {
+    public static String fitI(int i, int size, boolean right) {
         String iAsString = "" + i;
         int newLength = iAsString.length();
         return fit(iAsString, newLength > size ? newLength : size, right);
     }
     
-    public String fitD(Date d, int size, boolean right) {
+    public static String fitD(Date d, int size, boolean right) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yyyy");
         String dAsString = dateFormatter.format(d);
         return fit(dAsString, size, right);
