@@ -115,8 +115,7 @@ public class Driver {
     }
 
     private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
-        System.exit(0);
-        return true;
+        return !isSaved;
     }
 
     private void help() {
@@ -179,16 +178,21 @@ public class Driver {
             return;
         }
         if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])) {
-            System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
+            System.out.println("Is this information correct: " + "\n\tbrand: " + params[1] +
+                    "\n\tlevel: " + params[2] + "\n\tprice: " + params[3] + "\n\tdays: " + params[4] + "\nEnter (y/n)");
             Scanner input = new Scanner(System.in);
-            if(input.next() == "y"){
-            pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
-        }else{
-                System.out.println("Enter information again");
+            if(input.nextLine().equals("y")){
+                pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
+                System.out.println("Created new repair price data record.");
+                return;
+            } else{
+                System.out.println("Please re-enter data");
+                return;
                 }
        
         } else {
             System.out.println("Incorrect type of one or more parameters");
+            return;
         }
     }
 
@@ -197,7 +201,10 @@ public class Driver {
             System.out.println("Incorrect number of parameters");
             return;
         }
+        System.out.println("Is this information correct: " + "creating new customer with name " + params[1] + " " + params[2]
+        + "\n Enter (y/n)");
         cd.addCustomer(params[1], params[2]);
+        System.out.println("Created new customer.");
     }
 
     private void addo(String[] params) {
@@ -209,7 +216,7 @@ public class Driver {
             try {
                 System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
             Scanner input = new Scanner(System.in);
-            if(input.next() == "y"){
+            if(input.next().equals("y")){
                 td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], params[5]);
             } else{
                 System.out.println("Incorrect type of one or more parameters");

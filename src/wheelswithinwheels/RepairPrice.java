@@ -25,4 +25,8 @@ public class RepairPrice {
     public String savableString() {
         return "addrp " + brand + " " + level + " " + price + " " + days;
     }
+    
+    public String toString() {
+        return brand + "\t" + level + "\t$" + price + "\t" + days; 
+    }
 }
