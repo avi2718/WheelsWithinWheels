@@ -17,7 +17,7 @@ public class Order extends Transaction {
     public String brand;
     public String level;
     public Float repairPrice;
-    public String comment;
+    public String comment = "";
     public Date promiseDate;
     public Date completionDate;
     public TransactionType type = TransactionType.ORDER;
@@ -30,6 +30,15 @@ public class Order extends Transaction {
         this.brand = brand;
         this.level = level;
         this.comment = comment;
+        promiseDate = plusDays(orderDate, brand, level);
+    }
+    public Order(int customerNumber, Date orderDate, String brand, String level) {
+        orderNumber = Transaction.transactionNumberCounter; 
+        Transaction.transactionNumberCounter++;
+        this.customerNumber = customerNumber;
+        this.orderDate = orderDate;
+        this.brand = brand;
+        this.level = level;
         promiseDate = plusDays(orderDate, brand, level);
     }
     

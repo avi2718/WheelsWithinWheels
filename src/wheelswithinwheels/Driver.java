@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class Driver {
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+    SimpleDateFormat formatter = new SimpleDateFormat("MMddyyyy");
     Support s = new Support();
     TransactionDatabase td = new TransactionDatabase();
     CustomerDatabase cd = new CustomerDatabase();
@@ -222,15 +222,21 @@ public class Driver {
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
                 System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
-            Scanner input = new Scanner(System.in);
-            if(input.next().equals("y")){
-                td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], params[5]);
-            } else{
-                System.out.println("Incorrect type of one or more parameters");
-            }
+                Scanner input = new Scanner(System.in);
+                if (input.next().equals("y")) {
+                    if (params.length == 5) {
+                        td.addOrderNoComment(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4]);
+                    } else {
+                        td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], params[5]);
+                    }
+                } else {
+                    System.out.println("Please re-enter data");
+                }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
+        } else {
+            System.out.println("Incorrect type of one or more parameters");
         }
     }
 
