@@ -222,7 +222,8 @@ public class Driver {
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && isStringInt(params[3])) {
             try {
-                td.addPayment(Integer.parseInt(params[1]), formatter.parse(params[2]), Integer.parseInt(params[3]));
+                formatter.parse(params[2]);
+                td.addPayment(Integer.parseInt(params[1]), params[2], Integer.parseInt(params[3]));
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
