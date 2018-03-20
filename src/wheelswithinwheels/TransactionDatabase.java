@@ -46,7 +46,7 @@ public class TransactionDatabase {
         o.completionDate = completionDate;
     }
     
-    public static void addPayment(int customerNumber, Date date, int amount) {
+    public static void addPayment(int customerNumber, String date, int amount) {
         Payment p = new Payment(customerNumber, date, amount);
         transactions.put(p.paymentNumber, p);
     }
