@@ -227,7 +227,7 @@ public class Driver {
                     if (params.length == 5) {
                         td.addOrderNoComment(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4]);
                     } else {
-                        td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], params[5]);
+                        td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], putCommentBackTogether(params, 5));
                     }
                 } else {
                     System.out.println("Please re-enter data");
@@ -314,6 +314,14 @@ public class Driver {
 
     private void prints() {
         td.printStatements();
+    }
+    
+    private String putCommentBackTogether(String[] params, int start) {
+        String cs = "";
+        for (int p = start; p < params.length; p++) {
+            cs += params[p];
+        }
+        return cs;
     }
 
     private void readc(String filename) {
