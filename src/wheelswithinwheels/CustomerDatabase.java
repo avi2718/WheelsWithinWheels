@@ -11,7 +11,9 @@ package wheelswithinwheels;
  */
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeSet;
 
 public class CustomerDatabase {
     public static Map<Integer, Customer> customers = new HashMap<Integer, Customer>();
@@ -27,6 +29,20 @@ public class CustomerDatabase {
             }
         }
         return null;
+    }
+    
+    public void printcnum() {
+        
+        TreeSet<Integer> orderedSet = new TreeSet<Integer>();
+        Iterator<Integer> iter = customers.keySet().iterator();
+        while(iter.hasNext()){//Places Keys in a treeset which automatically sorts them, then prints the customers using that set
+            orderedSet.add(iter.next());
+     }
+        
+        Iterator<Integer> treeSetIter = orderedSet.iterator();
+        while (treeSetIter.hasNext()) {
+            System.out.println(customers.get(treeSetIter.next()));
+        }
     }
     
     public void addCustomer(String firstName, String lastName) {
