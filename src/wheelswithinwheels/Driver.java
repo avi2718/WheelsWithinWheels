@@ -37,82 +37,86 @@ public class Driver {
     private boolean driverCycle(String nextLine) {
         isSaved = false;
         String[] line = s.splitStringIntoParts(nextLine);
-        switch (line[0]) {
-            case "quit":
-                if (shouldQuit()) {
-                    return false;
-                }
-                break;
-            case "help":
-                help();
-                break;
-            case "addrp":
-                addrp(line);
-                break;
-            case "addc":
-                addc(line);
-                break;
-            case "addo":
-                addo(line);
-                break;
-            case "addp":
-                addp(line);
-                break;
-            case "comp":
-                comp(line);
-                break;
-            case "printrp":
-                printrp();
-                break;
-            case "printcnum":
-                printcnum(line);
-                break;
-            case "printcname":
-                printcname(line);
-                break;
-            case "printo":
-                printo();
-                break;
-            case "printc":
-                printc();
-                break;
-            case "printp":
-                printp();
-                break;
-            case "printt":
-                printt();
-                break;
-            case "prints":
-                prints();
-                break;
-            case "printr":
-                printr();
-                break;
-            case "readc":
-                if (line.length == 2) {
-                    readc(line[1]);
-                } else {
-                    System.out.println("Bad Input");
-                }
-                break;
-            case "restorebs":
-                System.out.println("Restoring Bike Shop");
-                if (line.length == 2) {
-                    restorebs(line[1]);
-                } else {
-                    System.out.println("Bad Input");
-                }
-                break;
-            case "savebs":
-                if (line.length == 2) {
-                    savebs(line[1]);
-                } else {
-                    System.out.println("Bad Input");
-                }
-                break;
-            default:
-                System.out.println("Invalid Command");
-                break;
+        if (line.length > 0) {
+            switch (line[0]) {
+                case "quit":
+                    if (shouldQuit()) {
+                        return false;
+                    }
+                    break;
+                case "help":
+                    help();
+                    break;
+                case "addrp":
+                    addrp(line);
+                    break;
+                case "addc":
+                    addc(line);
+                    break;
+                case "addo":
+                    addo(line);
+                    break;
+                case "addp":
+                    addp(line);
+                    break;
+                case "comp":
+                    comp(line);
+                    break;
+                case "printrp":
+                    printrp();
+                    break;
+                case "printcnum":
+                    printcnum();
+                    break;
+                case "printcname":
+                    printcname();
+                    break;
+                case "printo":
+                    printo();
+                    break;
+                case "printc":
+                    printc();
+                    break;
+                case "printp":
+                    printp();
+                    break;
+                case "printt":
+                    printt();
+                    break;
+                case "prints":
+                    prints();
+                    break;
+                case "printr":
+                    printr();
+                    break;
+                case "readc":
+                    if (line.length == 2) {
+                        restorebs(line[1]);
+                    } else {
+                        System.out.println("Incorrect Number of Specifications");
+                    }
+                    break;
+                case "restorebs":
+                    System.out.println("Restoring Bike Shop");
+                    if (line.length == 2) {
+                        restorebs(line[1]);
+                    } else {
+                        System.out.println("Incorrect Number of Specifications");
+                    }
+                    break;
+                case "savebs":
+                    if (line.length == 2) {
+                        savebs(line[1]);
+                    } else {
+                        System.out.println("Incorrect Number of Specifications");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid Command");
+                    break;
+            }
+        } else {
+            System.out.println("Invalid Command");
         }
         return true;
     }
@@ -177,20 +181,20 @@ public class Driver {
 
     private void addrp(String[] params) {
         if (params.length != 5) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])) {
             pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
         } else {
-            System.out.println("Incorrect type of one or more parameters");
+            System.out.println("Something you have entered is not a number or date");
             return;
         }
     }
 
     private void addc(String[] params) {
         if (params.length != 3) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         cd.addCustomer(params[1], params[2]);
@@ -198,13 +202,15 @@ public class Driver {
 
     private void addo(String[] params) {
         if (!(params.length >= 5)) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
+
+        //System.out.println("ID: " + cd.isValidCustomerID(params[1]) + "Date: " + isStringDate(params[2]) + "Brand: " + pl.isValidBrand(params[3]) + "Level: " + pl.isValidLevel(params[4]));
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
                 formatter.parse(params[2]);
-                
+
                 if (params.length == 5) {
                     td.addOrderNoComment(Integer.parseInt(params[1]), params[2], params[3], params[4]);
                 } else {
@@ -214,13 +220,13 @@ public class Driver {
                 System.out.println("Invalid date");
             }
         } else {
-            System.out.println("Incorrect type of one or more parameters");
+            System.out.println("Something you have entered is not a number or date");
         }
     }
 
     private void addp(String[] params) {
         if ((params.length != 4)) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && isStringInt(params[3])) {
@@ -235,7 +241,7 @@ public class Driver {
 
     private void comp(String[] params) {
         if ((params.length != 3)) {
-            System.out.println("Incorrect number of parameters");
+            System.out.println("Incorrect Number of Specifications");
             return;
         }
         if (td.isValidOrder(params[1]) && isStringDate(params[2])) {
@@ -255,12 +261,14 @@ public class Driver {
         PriceList.printList();
     }
 
-    private void printcnum(String[] params) {
-        System.out.println(CustomerDatabase.findByNumber(Integer.parseInt(params[1])));
+    private void printcnum() {
+        cd.printcnum();
+        //System.out.println(CustomerDatabase.findByNumber(Integer.parseInt(params[1])));
     }
 
-    private void printcname(String[] params) {
-        System.out.println(CustomerDatabase.findByName(params[1], params[2]));
+    private void printcname() {
+        cd.printcname();
+        //System.out.println(CustomerDatabase.findByName(params[1], params[2]));
     }
 
     private void printo() {
@@ -286,17 +294,13 @@ public class Driver {
     private String putCommentBackTogether(String[] params, int start) {
         String cs = "";
         for (int p = start; p < params.length; p++) {
-            cs += " " + params[p];
+            cs += params[p] + " ";
         }
         return cs;
     }
 
-    private void readc(String filename) {
-
-    }
-
     private void savebs(String filename) {
-        String bikeShopAsString = td.savableString() + cd.savableString();
+        String bikeShopAsString = cd.savableString() + pl.savableString() + td.savableString();
         s.writeTextFile(filename, bikeShopAsString);
         isSaved = true;
     }
@@ -384,38 +388,37 @@ public class Driver {
                 break;
             case "readc":
                 if (line.length == 2) {
-                    readc(line[1]);
+                    restorebs(line[1]);
                 } else {
-                    System.out.print("Bad Input\n");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "restorebs":
-                //System.out.println("Restoring Bike Shop");
                 if (line.length == 2) {
                     restorebs(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "savebs":
                 if (line.length == 2) {
                     savebs(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "rncn":
                 if (line.length == 2) {
                     rncn(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             case "rnon":
                 if (line.length == 2) {
                     rnon(line[1]);
                 } else {
-                    System.out.println("Bad Input");
+                    System.out.println("Incorrect Number of Specifications");
                 }
                 break;
             default:
