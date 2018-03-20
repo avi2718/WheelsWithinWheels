@@ -178,18 +178,7 @@ public class Driver {
             return;
         }
         if (params[1] instanceof String && params[2] instanceof String && isStringInt(params[3]) && isStringInt(params[4])) {
-            System.out.println("Is this information correct: " + "\n\tbrand: " + params[1] +
-                    "\n\tlevel: " + params[2] + "\n\tprice: " + params[3] + "\n\tdays: " + params[4] + "\nEnter (y/n)");
-            Scanner input = new Scanner(System.in);
-            if(input.nextLine().equals("y")){
-                pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
-                System.out.println("Created new repair price data record.");
-                return;
-            } else{
-                System.out.println("Please re-enter data");
-                return;
-                }
-       
+            pl.addRepairPrice(params[1], params[2], Integer.parseInt(params[3]), Integer.parseInt(params[4]));
         } else {
             System.out.println("Incorrect type of one or more parameters");
             return;
@@ -201,17 +190,7 @@ public class Driver {
             System.out.println("Incorrect number of parameters");
             return;
         }
-        System.out.println("Is this information correct: " + "creating new customer with name " + params[1] + " " + params[2]
-        + "\n Enter (y/n)");
-        Scanner input = new Scanner(System.in);
-        if(input.nextLine().equals("y")){
-                cd.addCustomer(params[1], params[2]);
-                System.out.println("Created new customer.");
-                return;
-            } else{
-                System.out.println("Please re-enter data");
-                return;
-                }
+        cd.addCustomer(params[1], params[2]);
     }
 
     private void addo(String[] params) {
@@ -221,16 +200,10 @@ public class Driver {
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
-                System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
-                Scanner input = new Scanner(System.in);
-                if (input.next().equals("y")) {
-                    if (params.length == 5) {
-                        td.addOrderNoComment(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4]);
-                    } else {
-                        td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], putCommentBackTogether(params, 5));
-                    }
+                if (params.length == 5) {
+                    td.addOrderNoComment(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4]);
                 } else {
-                    System.out.println("Please re-enter data");
+                    td.addOrder(Integer.parseInt(params[1]), formatter.parse(params[2]), params[3], params[4], putCommentBackTogether(params, 5));
                 }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
@@ -247,13 +220,7 @@ public class Driver {
         }
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && isStringInt(params[3])) {
             try {
-                System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
-            Scanner input = new Scanner(System.in);
-            if(input.next() == "y"){
                 td.addPayment(Integer.parseInt(params[1]), formatter.parse(params[2]), Integer.parseInt(params[3]));
-            }else{
-                System.out.println("Incorrect type of one or more parameters");
-            }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
@@ -267,19 +234,13 @@ public class Driver {
         }
         if (td.isValidOrder(params[1]) && isStringDate(params[2])) {
             try {
-                System.out.println("Is this information correct: " + params[1] + params[2] + params[3] + params[4] + " (y/n)");
-            Scanner input = new Scanner(System.in);
-            if(input.next() == "y"){
                 td.completeOrder(Integer.parseInt(params[1]), formatter.parse(params[2]));
-            }else{
-                System.out.println("Incorrect type of one or more parameters");
-            }
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
         }
     }
-    
+
     private void printc() {
         cd.printCustomers();
     }
@@ -315,7 +276,7 @@ public class Driver {
     private void prints() {
         td.printStatements();
     }
-    
+
     private String putCommentBackTogether(String[] params, int start) {
         String cs = "";
         for (int p = start; p < params.length; p++) {
@@ -351,13 +312,12 @@ public class Driver {
         }
         Customer.customerNumberCounter = cn;
     }
-    
+
     private void rnon(String orderNumber) {
         int on = 0;
         try {
             on = Integer.parseInt(orderNumber);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println("Invalid Order Number");
         }
         Transaction.transactionNumberCounter = on;
@@ -367,7 +327,7 @@ public class Driver {
         isSaved = false;
         System.out.println(nextLine);
         String[] line = s.splitStringIntoParts(nextLine);
-        
+
         switch (line[0]) {
             case "quit":
                 if (shouldQuit()) {
@@ -404,7 +364,7 @@ public class Driver {
             case "printo":
                 printo();
                 break;
-                case "printc":
+            case "printc":
                 printc();
                 break;
             case "printp":
@@ -441,12 +401,11 @@ public class Driver {
             case "rncn":
                 if (line.length == 2) {
                     rncn(line[1]);
-                }
-                else {
+                } else {
                     System.out.println("Bad Input");
                 }
                 break;
-            case "rnon": 
+            case "rnon":
                 if (line.length == 2) {
                     rnon(line[1]);
                 } else {
