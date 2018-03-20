@@ -57,6 +57,7 @@ public class Order extends Transaction {
         }
         this.brand = brand;
         this.level = level;
+        this.repairPrice = PriceList.returnPrice(brand, level);
         promiseDate = plusDays(orderDate, brand, level);
         super.type = TransactionType.ORDER;
     }

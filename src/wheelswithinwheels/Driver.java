@@ -35,15 +35,15 @@ public class Driver {
     }
 
     private boolean driverCycle(String nextLine) {
-        isSaved = false;
         String[] line = s.splitStringIntoParts(nextLine);
         if (line.length > 0) {
             switch (line[0]) {
                 case "quit":
-                    if (shouldQuit()) {
+                    if (isSaved) {
                         return false;
+                    } else {
+                        return shouldSave();
                     }
-                    break;
                 case "help":
                     help();
                     break;
@@ -111,6 +111,8 @@ public class Driver {
                         System.out.println("Incorrect Number of Specifications");
                     }
                     break;
+                case "isSaved?": 
+                    System.out.println(isSaved);
                 default:
                     System.out.println("Invalid Command");
                     break;
@@ -121,10 +123,27 @@ public class Driver {
         return true;
     }
 
-    private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
+    /* private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
         return !isSaved;
+    }*/
+    
+    private boolean shouldSave() {
+        System.out.println("Are you sure you would like to quit without saving? (y/n)");
+        while (true) {//possible additions: Remove rp, cnum, cname, etc
+            Scanner input = new Scanner(System.in);
+            String nextLine = input.nextLine();
+            switch (nextLine) {
+                case "y":
+                    return false;
+                case "n":
+                    return true;
+                default:
+                    System.out.println("Please enter y or n");
+            }
+        }
     }
 
+    
     private void help() {
         System.out.println("Welcome to the Wheels Within Wheels bike shop system! "
                 + "\nThese are the available commands. "
@@ -180,6 +199,7 @@ public class Driver {
     }
 
     private void addrp(String[] params) {
+        isSaved = false;
         if (params.length != 5) {
             System.out.println("Incorrect Number of Specifications");
             return;
@@ -193,6 +213,7 @@ public class Driver {
     }
 
     private void addc(String[] params) {
+        isSaved = false;
         if (params.length != 3) {
             System.out.println("Incorrect Number of Specifications");
             return;
@@ -201,6 +222,7 @@ public class Driver {
     }
 
     private void addo(String[] params) {
+        isSaved = false;
         if (!(params.length >= 5)) {
             System.out.println("Incorrect Number of Specifications");
             return;
@@ -225,6 +247,7 @@ public class Driver {
     }
 
     private void addp(String[] params) {
+        isSaved = false;
         if ((params.length != 4)) {
             System.out.println("Incorrect Number of Specifications");
             return;
@@ -240,6 +263,7 @@ public class Driver {
     }
 
     private void comp(String[] params) {
+        isSaved = false;
         if ((params.length != 3)) {
             System.out.println("Incorrect Number of Specifications");
             return;
@@ -306,6 +330,7 @@ public class Driver {
     }
 
     private void restorebs(String filename) {
+        isSaved = false;
         String file = s.readTextFile(filename);
         String[] lines = s.splitStringIntoLines(file);
         for (String line : lines) {
@@ -334,13 +359,12 @@ public class Driver {
     }
 
     private boolean restoreDriverCycle(String nextLine) {
-        isSaved = false;
         System.out.println(nextLine);
         String[] line = s.splitStringIntoParts(nextLine);
 
         switch (line[0]) {
             case "quit":
-                if (shouldQuit()) {
+                if (isSaved) {
                     return false;
                 }
                 break;
