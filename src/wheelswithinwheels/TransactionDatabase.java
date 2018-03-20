@@ -92,6 +92,10 @@ public class TransactionDatabase {
     public String savableString() {
         String s = "";
         for (Transaction t : transactions.values()) {
+            if (t.type == TransactionType.ORDER) {
+                Order o = (Order) t;
+                s += "rnon " + o.orderNumber + "\n";
+            }
             s += t.savableString() + "\n";
         }
         return s;
