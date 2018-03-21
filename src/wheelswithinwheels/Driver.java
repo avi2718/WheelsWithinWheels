@@ -111,8 +111,6 @@ public class Driver {
                         System.out.println("Incorrect Number of Specifications");
                     }
                     break;
-                case "isSaved?": 
-                    System.out.println(isSaved);
                 default:
                     System.out.println("Invalid Command");
                     break;
@@ -219,7 +217,7 @@ public class Driver {
 
     private void addo(String[] params) {
         isSaved = false;
-        if (!(params.length >= 5)) {
+        if (!(params.length >= 5)) { 
             System.out.println("Incorrect Number of Specifications");
             return;
         }
@@ -229,7 +227,7 @@ public class Driver {
                 formatter.parse(params[2]);
 
                 if (params.length == 5) {
-                    td.addOrderNoComment(Integer.parseInt(params[1]), params[2], params[3], params[4]);
+                    td.addOrder(Integer.parseInt(params[1]), params[2], params[3], params[4], "");
                 } else {
                     td.addOrder(Integer.parseInt(params[1]), params[2], params[3], params[4], putCommentBackTogether(params, 5));
                 }
@@ -351,6 +349,7 @@ public class Driver {
         Transaction.transactionNumberCounter = on;
     }
 
+    //allows restorebs to use rncn and rnon without allowing the user to access these "forbidden" functions
     private boolean restoreDriverCycle(String nextLine) {
         System.out.println(nextLine);
         String[] line = s.splitStringIntoParts(nextLine);

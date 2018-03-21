@@ -44,24 +44,7 @@ public class Order extends Transaction {
         super.type = TransactionType.ORDER;
     }
     
-    public Order(int customerNumber, String saveableDate, String brand, String level) {
-        orderNumber = Transaction.transactionNumberCounter; 
-        Transaction.transactionNumberCounter++;
-        super.customerNumber = customerNumber;
-        this.customerNumber = customerNumber;
-        this.saveableDate = saveableDate;
-        try {
-            this.orderDate = dateFormatter.parse(saveableDate);
-        } catch (ParseException p) {
-            System.out.println("Invalid Date");
-        }
-        this.brand = brand;
-        this.level = level;
-        this.repairPrice = PriceList.returnPrice(brand, level);
-        promiseDate = plusDays(orderDate, brand, level);
-        super.type = TransactionType.ORDER;
-    }
-    
+    //calculates promise date from pricing level and order date
     private Date plusDays(Date orderDate, String brand, String level) {
         Calendar c = Calendar.getInstance();
         c.setTime(orderDate);

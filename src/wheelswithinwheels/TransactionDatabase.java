@@ -33,11 +33,7 @@ public class TransactionDatabase {
             transactions.put(o.orderNumber, o);
     }
     
-    public static void addOrderNoComment(int customerNumber, String date, String brand, String level) {
-            Order o = new Order(customerNumber, date, brand, level);
-            transactions.put(o.orderNumber, o);
-    }
-    
+    //checks to see if a given order number applies to an order in the system
     public static boolean isValidOrder(String orderNumber) {
         try {
             return transactions.get(Integer.parseInt(orderNumber)).type == TransactionType.ORDER;
