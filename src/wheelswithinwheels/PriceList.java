@@ -13,9 +13,9 @@ package wheelswithinwheels;
 import java.util.*;
 public class PriceList {
     public static ArrayList<RepairPrice> prices = new ArrayList<RepairPrice>();
-    private static Set<String> validBrands = new HashSet(Arrays.asList("trek", "cannondale", "salsa",
+    public static Set<String> validBrands = new HashSet(Arrays.asList("trek", "cannondale", "salsa",
             "jamis", "specialized", "surly", "giant", "bianchi", "soma", "cervelo"));
-    private static Set<String> validLevels = new HashSet(Arrays.asList("silver", "gold", "platinum"));
+    public static Set<String> validLevels = new HashSet(Arrays.asList("silver", "gold", "platinum"));
    
     
     public static void addRepairPrice(String brand, String level, int price, int days) {
