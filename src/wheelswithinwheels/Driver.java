@@ -111,8 +111,6 @@ public class Driver {
                         System.out.println("Incorrect Number of Specifications");
                     }
                     break;
-                case "isSaved?": 
-                    System.out.println(isSaved);
                 default:
                     System.out.println("Invalid Command");
                     break;
@@ -123,13 +121,10 @@ public class Driver {
         return true;
     }
 
-    /* private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
-        return !isSaved;
-    }*/
-    
+    //if the bike shop is not saved, double checks with the user to make sure they would like to quit
     private boolean shouldSave() {
         System.out.println("Are you sure you would like to quit without saving? (y/n)");
-        while (true) {//possible additions: Remove rp, cnum, cname, etc
+        while (true) {
             Scanner input = new Scanner(System.in);
             String nextLine = input.nextLine();
             switch (nextLine) {
@@ -223,18 +218,16 @@ public class Driver {
 
     private void addo(String[] params) {
         isSaved = false;
-        if (!(params.length >= 5)) {
+        if (!(params.length >= 5)) { 
             System.out.println("Incorrect Number of Specifications");
             return;
         }
-
-        //System.out.println("ID: " + cd.isValidCustomerID(params[1]) + "Date: " + isStringDate(params[2]) + "Brand: " + pl.isValidBrand(params[3]) + "Level: " + pl.isValidLevel(params[4]));
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
                 formatter.parse(params[2]);
 
                 if (params.length == 5) {
-                    td.addOrderNoComment(Integer.parseInt(params[1]), params[2], params[3], params[4]);
+                    td.addOrder(Integer.parseInt(params[1]), params[2], params[3], params[4], "");
                 } else {
                     td.addOrder(Integer.parseInt(params[1]), params[2], params[3], params[4], putCommentBackTogether(params, 5));
                 }
@@ -358,6 +351,7 @@ public class Driver {
         Transaction.transactionNumberCounter = on;
     }
 
+    //allows restorebs to use rncn and rnon without allowing the user to access these "forbidden" functions
     private boolean restoreDriverCycle(String nextLine) {
         System.out.println(nextLine);
         String[] line = s.splitStringIntoParts(nextLine);
@@ -390,10 +384,10 @@ public class Driver {
                 printrp();
                 break;
             case "printcnum":
-                printcnum(line);
+                printcnum();
                 break;
             case "printcname":
-                printcname(line);
+                printcname();
                 break;
             case "printo":
                 printo();
