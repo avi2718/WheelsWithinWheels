@@ -253,6 +253,9 @@ public class Driver {
                 System.out.println("Invalid date");
             }
         }
+        else {
+            System.out.println("Something you have entered is not a number or date");
+        }
     }
 
     private void comp(String[] params) {
@@ -267,6 +270,9 @@ public class Driver {
             } catch (ParseException e) {
                 System.out.println("Invalid date");
             }
+        }
+        else {
+            System.out.println("Invalid Date or Nonexistent Order");
         }
     }
 
