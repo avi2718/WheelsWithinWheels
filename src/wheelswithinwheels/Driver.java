@@ -95,7 +95,7 @@ public class Driver {
                     break;
                 case "readc":
                     if (line.length == 2) {
-                        restorebs(line[1]);
+                        readc(line[1]);
                     } else {
                         System.out.println("Incorrect Number of Specifications");
                     }
@@ -344,6 +344,15 @@ public class Driver {
             restoreDriverCycle(line);
         }
     }
+    
+    private void readc(String filename) {
+        isSaved = false;
+        String file = s.readTextFile(filename);
+        String[] lines = s.splitStringIntoLines(file);
+        for (String line : lines) {
+            restoreDriverCycle(line);
+        }
+    }
 
     private void rncn(String customerNumber) {
         int cn = 0;
@@ -364,6 +373,7 @@ public class Driver {
         }
         Transaction.transactionNumberCounter = on;
     }
+    
 
     //allows restorebs to use rncn and rnon without allowing the user to access these "forbidden" functions
     private boolean restoreDriverCycle(String nextLine) {
@@ -420,7 +430,7 @@ public class Driver {
                 break;
             case "readc":
                 if (line.length == 2) {
-                    restorebs(line[1]);
+                    readc(line[1]);
                 } else {
                     System.out.println("Incorrect Number of Specifications");
                 }
