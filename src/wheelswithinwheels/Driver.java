@@ -27,7 +27,7 @@ public class Driver {
     public void driver() {
         Scanner input = new Scanner(System.in);
 
-        while (true) {//possible additions: Remove rp, cnum, cname, etc
+        while (true) {
             if (!driverCycle(input.nextLine())) {
                 break;
             }
@@ -122,14 +122,10 @@ public class Driver {
         }
         return true;
     }
-
-    /* private boolean shouldQuit() {//could prompt the user to save if they have unsaved changes
-        return !isSaved;
-    }*/
     
     private boolean shouldSave() {
         System.out.println("Are you sure you would like to quit without saving? (y/n)");
-        while (true) {//possible additions: Remove rp, cnum, cname, etc
+        while (true) {
             Scanner input = new Scanner(System.in);
             String nextLine = input.nextLine();
             switch (nextLine) {
@@ -228,7 +224,6 @@ public class Driver {
             return;
         }
 
-        //System.out.println("ID: " + cd.isValidCustomerID(params[1]) + "Date: " + isStringDate(params[2]) + "Brand: " + pl.isValidBrand(params[3]) + "Level: " + pl.isValidLevel(params[4]));
         if (cd.isValidCustomerID(params[1]) && isStringDate(params[2]) && pl.isValidBrand(params[3]) && pl.isValidLevel(params[4])) {
             try {
                 formatter.parse(params[2]);
@@ -287,12 +282,10 @@ public class Driver {
 
     private void printcnum() {
         cd.printcnum();
-        //System.out.println(CustomerDatabase.findByNumber(Integer.parseInt(params[1])));
     }
 
     private void printcname() {
         cd.printcname();
-        //System.out.println(CustomerDatabase.findByName(params[1], params[2]));
     }
 
     private void printo() {
@@ -390,10 +383,10 @@ public class Driver {
                 printrp();
                 break;
             case "printcnum":
-                printcnum(line);
+                printcnum();
                 break;
             case "printcname":
-                printcname(line);
+                printcname();
                 break;
             case "printo":
                 printo();
