@@ -13,7 +13,11 @@ import java.util.Scanner;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Driver {
 
@@ -330,9 +334,12 @@ public class Driver {
         isSaved = false;
         String file = s.readTextFile(filename);
         String[] lines = s.splitStringIntoLines(file);
-        td = new TransactionDatabase();
-        cd = new CustomerDatabase();
-        pl = new PriceList();
+        td.transactions = new HashMap<Integer, Transaction>();
+        cd.customers = new HashMap<Integer, Customer>();
+        pl.prices = new ArrayList<RepairPrice>();
+        pl.validBrands = new HashSet(Arrays.asList("trek", "cannondale", "salsa",
+            "jamis", "specialized", "surly", "giant", "bianchi", "soma", "cervelo"));
+        pl.validLevels = new HashSet(Arrays.asList("silver", "gold", "platinum"));
         for (String line : lines) {
             restoreDriverCycle(line);
         }
