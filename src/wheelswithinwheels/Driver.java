@@ -108,7 +108,7 @@ public class Driver {
                     if (line.length == 2) {
                         savebs(line[1]);
                     } else {
-                        System.out.println("Incorrect Number of Specifications");
+                        System.out.println("No spaces allowed in file name");
                     }
                     break;
                 default:
@@ -330,6 +330,9 @@ public class Driver {
         isSaved = false;
         String file = s.readTextFile(filename);
         String[] lines = s.splitStringIntoLines(file);
+        td = new TransactionDatabase();
+        cd = new CustomerDatabase();
+        pl = new PriceList();
         for (String line : lines) {
             restoreDriverCycle(line);
         }
